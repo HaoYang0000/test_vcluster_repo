@@ -12,11 +12,12 @@ jobs:
   sync-branch:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@master
+      - uses:  actions/checkout@v2
       - name: Merge branch ${{ github.event.inputs.source_branch }} -> ${{ github.event.inputs.target_branch }}
-        uses: devmasx/merge-branch@master
+        uses: everlytic/branch-merge@1.1.2
         with:
           type: now
-          from_branch: ${{ github.event.inputs.source_branch }}
+          source_ref: ${{ github.event.inputs.source_branch }}
           target_branch: ${{ github.event.inputs.target_branch }}
           github_token: ${{ github.token }} 
+          commit_message_template: '[Automated] Merged {source_ref} into target {target_branch}'
