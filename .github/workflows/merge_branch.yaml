@@ -1,5 +1,7 @@
 name: Merge branch
 on:
+  repository_dispatch:
+    types: curl_request_merge
   workflow_dispatch:
     inputs:
       source_branch:
@@ -16,7 +18,6 @@ jobs:
       - name: Merge branch ${{ github.event.inputs.source_branch }} -> ${{ github.event.inputs.target_branch }}
         uses: everlytic/branch-merge@1.1.2
         with:
-          type: now
           source_ref: ${{ github.event.inputs.source_branch }}
           target_branch: ${{ github.event.inputs.target_branch }}
           github_token: ${{ github.token }} 
