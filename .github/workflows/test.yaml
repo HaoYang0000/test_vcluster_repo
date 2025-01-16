@@ -1,0 +1,22 @@
+name: tests
+
+on: 
+  push:
+  pull_request:
+  workflow_dispatch:
+    inputs:
+      reason:
+        description: 'Descriptive name of the workflow run'
+        required: false
+        default: ''
+
+jobs:
+  test-run-name:
+    strategy:
+      matrix:
+        runner: [ ubuntu-latest, ARM64 ]
+    runs-on: ${{ matrix.runner }}
+    steps:
+    - name: print pipeline output
+      run: |
+        echo "run test"
